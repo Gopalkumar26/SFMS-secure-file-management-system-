@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Quarantine — SFMS{% endblock %}
+{% block content %}
+<div class="card p-3 card-compact">
+  <h5>Quarantined files (your uploads)</h5>
+  <p class="small-muted">Files that were flagged for suspicious content or extension.</p>
+  {% if files %}
+    <div class="list-group">
+      {% for f in files %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <div class="file-name">{{ f['filename'] }}</div>
+            <div class="small-muted">Uploaded: {{ f['uploaded_at'][:19] }} • {{ (f['size'] // 1024) }} KB</div>
+          </div>
+          <div class="d-flex gap-2">
+            <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('metadata', file_id=f['id']) }}">Info</a>
+            <form method="post" action="{{ url_for('delete_file', file_id=f['id']) }}" onsubmit="return confirmAction('Permanently delete this quarantined file?');">
+              <button class="btn btn-sm btn-outline-danger">Delete</button>
+            </form>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="small-muted">No quarantined files found.</div>
+  {% endif %}
+</div>
+{% endblock %}

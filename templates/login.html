@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Login — SFMS{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <div class="card p-4 card-compact">
+      <h4>Sign in</h4>
+      <form method="post" novalidate>
+        <div class="mb-3">
+          <label class="form-label">Username</label>
+          <input name="username" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">Password</label>
+          <input name="password" type="password" class="form-control" required />
+        </div>
+        <div class="mb-3">
+          <label class="form-label">TOTP token (if enabled)</label>
+          <input name="token" class="form-control" placeholder="123456" />
+        </div>
+        <button class="btn btn-accent w-100">Login</button>
+      </form>
+      <div class="mt-3 small-muted text-center">
+        <a href="{{ url_for('register') }}">Create account</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

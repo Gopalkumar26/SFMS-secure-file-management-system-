@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block title %}Edit File — SFMS{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-10">
+    <div class="card p-3 card-compact">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <div>
+          <h5>Edit: {{ f['filename'] }}</h5>
+          <div class="small-muted">Editing plain-text files only. Binary files are not editable via web.</div>
+        </div>
+        <div class="small-muted">Size: {{ (f['size'] // 1024) }} KB</div>
+      </div>
+
+      <form method="post">
+        <div class="mb-3">
+          <textarea name="content" rows="18" class="form-control" style="font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, 'Courier New', monospace;">{{ content }}</textarea>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-accent">Save changes</button>
+          <a class="btn btn-light" href="{{ url_for('dashboard') }}">Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

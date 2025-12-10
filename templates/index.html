@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block title %}Welcome — SFMS{% endblock %}
+{% block content %}
+<div class="row align-items-center">
+  <div class="col-lg-7">
+    <div class="app-hero mb-3">
+      <h1 class="mb-1">Secure File Management System</h1>
+      <p class="muted mb-2">Upload, encrypt, share and manage files safely. Quarantine suspicious files automatically.</p>
+      {% if not user %}
+        <a class="btn btn-accent me-2" href="{{ url_for('register') }}">Get started — Register</a>
+        <a class="btn btn-outline-primary" href="{{ url_for('login') }}">Sign in</a>
+      {% else %}
+        <a class="btn btn-accent" href="{{ url_for('dashboard') }}">Go to dashboard</a>
+      {% endif %}
+    </div>
+
+    <div class="card card-compact p-3 mb-3">
+      <div class="d-flex align-items-center gap-3">
+        <div style="width:56px;height:56px;border-radius:10px;background:linear-gradient(135deg,#eef2ff,#eef9ff);display:flex;align-items:center;justify-content:center;">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"><path d="M12 3v4" stroke="#4f46e5" stroke-width="1.5"/><path d="M7 7h10" stroke="#4f46e5" stroke-width="1.5"/></svg>
+        </div>
+        <div>
+          <div class="file-name">Encrypted by AES-GCM</div>
+          <div class="small-muted">Files are encrypted server-side using a master key (prototype).</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-compact p-3">
+      <h5 class="mb-2">Quick links</h5>
+      <div class="d-flex gap-2 flex-wrap">
+        <a class="btn btn-light" href="{{ url_for('upload') }}">Upload</a>
+        <a class="btn btn-light" href="{{ url_for('login') }}">Sign in</a>
+        <a class="btn btn-light" href="{{ url_for('register') }}">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-5">
+    <div class="card card-compact p-3">
+      <h6>Why use SFMS?</h6>
+      <ul class="mb-0">
+        <li>Encrypted storage with quarantine for suspicious files.</li>
+        <li>Share files with other users securely.</li>
+        <li>Optional TOTP 2FA for accounts.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}
